@@ -49,10 +49,15 @@ public class Point {
 		if(theta < -180 ) throw new InvalidParameterException("Theta parameter is not allowed to be smaller than -180");
 		if(theta > 180) throw new InvalidParameterException("Theta parameter is not allowed to be bigger than +180");
 	
+		// convert theta from deg to rad
 		double radianAngle = theta * Math.PI / 180;
 		
-		this.y = (this.y*Math.cos(radianAngle) - this.x*Math.sin(radianAngle));
-		this.x = (this.y*Math.sin(radianAngle) + this.x*Math.cos(radianAngle));
+		// values need to be saved temporary so they don't affect other outcomes
+		double tempY = (y*Math.cos(radianAngle) - x*Math.sin(radianAngle));
+		double tempX = (y*Math.sin(radianAngle) + x*Math.cos(radianAngle));
+		
+		this.x = tempX;
+		this.y = tempY;
 	}
 	
 	public void displace(Point p){
