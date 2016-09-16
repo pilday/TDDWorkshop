@@ -7,9 +7,7 @@ public class Line {
 	private Point[] line;
 	
 	public Line(){
-		
 		line = new Point[0];
-		
 	}
 	
 	public Line(Point[] line){
@@ -19,7 +17,7 @@ public class Line {
 	public void add(Point p){
 		ArrayList<Point> tempLine = new ArrayList<Point>(Arrays.asList(line));
 		tempLine.add(p);
-		this.line = (Point[]) tempLine.toArray();
+		this.line = (Point[]) tempLine.toArray(new Point[tempLine.size()]);
 	}
 	
 	public int length(){
@@ -86,4 +84,14 @@ public class Line {
 		}	
 		return "";
 	}
+	
+	public boolean isValid(){
+		
+		if(line.length <= 1){
+			return false;
+		}
+		 return true;
+	}
+	
+	//public 
 }
