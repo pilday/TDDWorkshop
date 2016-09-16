@@ -1,5 +1,6 @@
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 
 public class Point {
@@ -62,10 +63,9 @@ public class Point {
 	
 	@Override
 	public String toString(){
-		NumberFormat formatter = new DecimalFormat(STRING_FORMAT);
-		
-		String xAsString = formatter.format(this.x);
-		String yAsString = formatter.format(this.y);
+		//Locale.US parameter used to get a '.' as decimal number separator instead of a ','
+		String xAsString = String.format(Locale.US, STRING_FORMAT, this.x);
+		String yAsString = String.format(Locale.US, STRING_FORMAT, this.y);
 		
 		return String.format("%s, %s", xAsString, yAsString);
 	}
