@@ -7,6 +7,8 @@ public class Line {
 	private Point[] line;
 	private double slope = 0;
 	private double intercept = 0;
+	private double slopeDeviation = 0;
+	private double interceptDeviation = 0;
 	private boolean regressionCalculated = false;
 
 	public Line(){
@@ -29,7 +31,7 @@ public class Line {
 	}
 
 	public int length(){
-		
+
 		return this.line.length;
 	}
 
@@ -83,7 +85,7 @@ public class Line {
 				if(i == 0){
 					sb.append(line[i].toString() + "," + System.lineSeparator());
 				}
-			    else if(i < line.length - 1){
+				else if(i < line.length - 1){
 					sb.append(" " + line[i].toString() + "," + System.lineSeparator());
 				}
 				else{
@@ -113,15 +115,15 @@ public class Line {
 	}
 
 	public double slope() throws ArithmeticException{
-		
+
 		if(!this.isValid()){
 			throw new ArithmeticException();
 		}
-		
+
 		if(regressionCalculated){
 			return this.slope;
 		}
-		
+
 		else{
 			calculateRegression();
 			regressionCalculated = true;
@@ -130,15 +132,15 @@ public class Line {
 	}
 
 	public double intercept() throws ArithmeticException{
-		
+
 		if(!this.isValid()){
 			throw new ArithmeticException();
 		}
-		
+
 		if(regressionCalculated){
 			return this.intercept;
 		}
-		
+
 		else{
 			calculateRegression();
 			regressionCalculated = true;
@@ -148,7 +150,7 @@ public class Line {
 
 
 	private void calculateRegression() throws ArithmeticException{
-		
+
 		try{
 
 			int count = line.length;
@@ -188,11 +190,28 @@ public class Line {
 			b2 -= ((double)xArray.length)*xMean*xMean; 
 			this.slope = b1 /b2; 
 			this.intercept = yMean - this.slope*xMean; 
+
+			double sb1 = 0; 
+			double sb2 = 0; 
+			double sa1 = 0; 
+			for (i = 0 ; i < xArray.length ; ++i) 
+			{ 
+				sb1 += (yArray[i] - this.slope *xArray[i] - this.intercept) * (yArray[i] - this.slope *xArray[i] - this.intercept); 
+				sb2 += (xArray[i] - xMean) * (xArray[i] - xMean); 
+				sa1 += xArray[i] * xArray[i]; 
+			} 
+			double sb = sb1 / (((double)xArray.length - 2) * sb2); 
+			double sa = sb * sa1 / (double)xArray.length; 
+			this.slopeDeviation = Math.sqrt(sb); 
+			this.interceptDeviation = Math.sqrt(sa); 
+
 		}
 
 		catch(Exception e){
 			throw new ArithmeticException("Regression couldn't be calculated.");
 		}
+
 	}
-} 
+}
+
 
