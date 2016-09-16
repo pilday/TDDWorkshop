@@ -189,10 +189,48 @@ public class LineTest {
 	}
 	
 	@Test
-	public void TestSlope(){
+	public void TestIsValidInfiniteSlope(){
+		Point point1 = new Point(1,1);
+		Point point2 = new Point(-1, 1);
+		
 		Line line = new Line();
 		
-		exception.expect(Exception.class);
+		line.add(point1);
+		line.add(point2);
+		
+		assertFalse(line.isValid());
+	}
+	
+	@Test 
+	public void TestValidSlope(){
+		Point point1 = new Point(1,3);
+		Point point2 = new Point(3,1);
+		
+		Line line = new Line();
+		line.add(point1);
+		line.add(point2);
+		
+		assertEquals(1.0, line.slope(), 0);
+	}
+	
+	@Test
+	public void TestSlopeExceptionNoValues(){
+		Line line = new Line();
+		
+		exception.expect(ArithmeticException.class);
+		line.slope();
+	}
+	
+	@Test
+	public void TestSlopeExceptionsInfiniteSlope(){
+		Point point1 = new Point(1,3);
+		Point point2 = new Point(-1, 3);
+		
+		Line line = new Line();
+		line.add(point1);
+		line.add(point2);
+		
+		exception.expect(ArithmeticException.class);
 		line.slope();
 	}
 }
