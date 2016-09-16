@@ -51,8 +51,8 @@ public class Point {
 	
 		double radianAngle = theta * Math.PI / 180;
 		
-		this.y = y*Math.cos(radianAngle) - x*Math.sin(radianAngle);
-		this.x = y*Math.sin(radianAngle) + x*Math.cos(radianAngle);
+		this.y = (this.y*Math.cos(radianAngle) - this.x*Math.sin(radianAngle));
+		this.x = (this.y*Math.sin(radianAngle) + this.x*Math.cos(radianAngle));
 	}
 	
 	public void displace(Point p){
