@@ -106,6 +106,9 @@ public class Line {
 		catch(Exception e){
 			return false;
 		}
+		if(this.slope == Double.NaN || this.intercept == Double.NaN){
+			return false;
+		}
 		return true;
 	}
 
