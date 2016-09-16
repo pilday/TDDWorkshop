@@ -1,3 +1,4 @@
+import java.security.InvalidParameterException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -36,7 +37,7 @@ public class Point {
 	}
 	
 	public double norm(){
-		// Pythagoras
+		// pythagoras
 		double xSquare = this.x * this.x;
 		double ySquare = this.y * this.y;
 				
@@ -44,6 +45,10 @@ public class Point {
 	}
 	
 	public void rotate(double theta) throws Exception{
+		// check if parameter is valid
+		if(theta < -180 ) throw new InvalidParameterException("Theta parameter is not allowed to be smaller than -180");
+		if(theta > 180) throw new InvalidParameterException("Theta parameter is not allowed to be bigger than +180");
+	
 		
 	}
 	
@@ -62,7 +67,7 @@ public class Point {
 	
 	@Override
 	public int hashCode() {
-		return 0;
+		return (int) (37 * Double.doubleToLongBits(this.x) * Double.doubleToLongBits(this.y));
 	};
 	
 	@Override
