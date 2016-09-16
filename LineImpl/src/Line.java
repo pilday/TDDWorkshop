@@ -111,6 +111,10 @@ public class Line {
 
 	public double slope() throws ArithmeticException{
 		
+		if(!this.isValid()){
+			throw new ArithmeticException();
+		}
+		
 		if(regressionCalculated){
 			return this.slope;
 		}
@@ -123,6 +127,10 @@ public class Line {
 	}
 
 	public double intercept() throws ArithmeticException{
+		
+		if(!this.isValid()){
+			throw new ArithmeticException();
+		}
 		
 		if(regressionCalculated){
 			return this.intercept;
@@ -140,7 +148,8 @@ public class Line {
 		
 		try{
 
-			int count = line.length; 
+			int count = line.length;
+
 			double [] xArray = new double [count]; 
 			double [] yArray = new double [count]; 
 			int i = 0; 
