@@ -29,6 +29,7 @@ public class Line {
 	}
 
 	public int length(){
+		
 		return this.line.length;
 	}
 
@@ -80,10 +81,10 @@ public class Line {
 			sb.append("(");
 			for(int i = 0; i < line.length; i++){
 				if(i == 0){
-					sb.append(line[i].toString() + System.lineSeparator());
+					sb.append(line[i].toString() + "," + System.lineSeparator());
 				}
 			    else if(i < line.length - 1){
-					sb.append(" " + line[i].toString() + System.lineSeparator());
+					sb.append(" " + line[i].toString() + "," + System.lineSeparator());
 				}
 				else{
 					sb.append(" " + line[i].toString() + ")");
