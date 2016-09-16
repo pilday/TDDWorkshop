@@ -5,6 +5,9 @@ import java.util.Locale;
 public class Line {
 
 	private Point[] line;
+	private double slope = 0;
+	private double intercept = 0;
+	private boolean regressionCalculated = false;
 
 	public Line(){
 		line = new Point[0];
@@ -22,6 +25,7 @@ public class Line {
 		ArrayList<Point> tempLine = new ArrayList<Point>(Arrays.asList(line));
 		tempLine.add(p);
 		this.line = (Point[]) tempLine.toArray(new Point[tempLine.size()]);
+		regressionCalculated = false;
 	}
 
 	public int length(){
@@ -60,8 +64,7 @@ public class Line {
 		double hash = 0;
 
 		for(Point p : line){
-			hash =+ p.getX();
-			hash =- p.getY();
+			hash += p.hashCode();
 		}
 
 		return (int) hash;
@@ -76,11 +79,14 @@ public class Line {
 
 			sb.append("(");
 			for(int i = 0; i < line.length; i++){
-				if(i < line.length - 1){
-					sb.append(line[i].toString() + ",\n");
+				if(i == 0){
+					sb.append(line[i].toString() + System.lineSeparator());
+				}
+			    else if(i < line.length - 1){
+					sb.append(" " + line[i].toString() + System.lineSeparator());
 				}
 				else{
-					sb.append(line[i].toString() + ")");
+					sb.append(" " + line[i].toString() + ")");
 				}
 			}
 			return sb.toString();
@@ -93,13 +99,45 @@ public class Line {
 		if(line.length <= 1){
 			return false;
 		}
+		try{
+			calculateRegression();
+		}
+		catch(Exception e){
+			return false;
+		}
 		return true;
 	}
 
-	public double slope(){
+	public double slope() throws Exception{
+		
+		if(regressionCalculated){
+			return this.slope;
+		}
+		
+		else{
+			calculateRegression();
+			regressionCalculated = true;
+			return this.slope;
+		}
+	}
 
+	public double intercept() throws Exception{
+		
+		if(regressionCalculated){
+			return this.intercept;
+		}
+		
+		else{
+			calculateRegression();
+			regressionCalculated = true;
+			return this.intercept;
+		}
+	}
+
+
+	private void calculateRegression() throws Exception{
+		
 		try{
-			String currentValue = null; 
 
 			int count = line.length; 
 			double [] xArray = new double [count]; 
@@ -135,31 +173,13 @@ public class Line {
 			} 
 			b1 -= ((double)xArray.length)*xMean*yMean; 
 			b2 -= ((double)xArray.length)*xMean*xMean; 
-			double b = b1 /b2; 
-			return b;
+			this.slope = b1 /b2; 
+			this.intercept = yMean - this.slope*xMean; 
 		}
 
 		catch(Exception e){
-			return 0;
+			throw new Exception("Regression couldn't be calculated.");
 		}
-		//		      double a = yMean - b*xMean; 
-		//		      System.out.println ("Geradengleichung : " + b + " * x + " + a); 
-		//
-		//		      double sb1 = 0; 
-		//		      double sb2 = 0; 
-		//		      double sa1 = 0; 
-		//		      for (i = 0 ; i < xArray.length ; ++i) 
-		//		      { 
-		//		         sb1 += (yArray[i] - b *xArray[i] - a) * (yArray[i] - b *xArray[i] - a); 
-		//		         sb2 += (xArray[i] - xMean) * (xArray[i] - xMean); 
-		//		         sa1 += xArray[i] * xArray[i]; 
-		//		      } 
-		//		      double sb = sb1 / (((double)xArray.length - 2) * sb2); 
-		//		      double sa = sb * sa1 / (double)xArray.length; 
-		//		      sb = Math.sqrt(sb); 
-		//		      sa = Math.sqrt(sa); 
-		//		      System.out.println ("Standardabweichung der Steigung : " + sb); 
-		//		      System.out.println ("Standardabweichung des y-Achsen-Abschnittes : " + sa); 
+	}
+} 
 
-	} 
-}
