@@ -191,7 +191,7 @@ public class LineTest {
 	@Test
 	public void TestIsValidInfiniteSlope(){
 		Point point1 = new Point(1,1);
-		Point point2 = new Point(-1, 1);
+		Point point2 = new Point(1,2);
 		
 		Line line = new Line();
 		
@@ -210,7 +210,27 @@ public class LineTest {
 		line.add(point1);
 		line.add(point2);
 		
-		assertEquals(1.0, line.slope(), 0);
+		assertEquals(-1.0, line.slope(), 0);
+	}
+	
+	@Test
+	public void TestValidSlopeRecalculation(){
+		Point point1 = new Point(1,3);
+		Point point2 = new Point(3,1);
+		
+		Line line = new Line();
+		line.add(point1);
+		line.add(point2);
+		
+		line.slope();
+		
+		Point point3 = new Point(1,1);
+		Point point4 = new Point(3,3);
+		
+		line.add(point3);
+		line.add(point4);
+		
+		assertEquals(0, line.slope(), 0);
 	}
 	
 	@Test
@@ -224,13 +244,40 @@ public class LineTest {
 	@Test
 	public void TestSlopeExceptionsInfiniteSlope(){
 		Point point1 = new Point(1,3);
-		Point point2 = new Point(-1, 3);
+		Point point2 = new Point(1,2);
 		
 		Line line = new Line();
 		line.add(point1);
 		line.add(point2);
 		
 		exception.expect(ArithmeticException.class);
-		line.slope();
+		line.slope(); 
+	}
+	
+	@Test
+	public void TestValidIntercept(){
+		Point point1 = new Point(2,2);
+		Point point2 = new Point(1,3);
+		
+		Line line = new Line();
+		
+		line.add(point1);
+		line.add(point2);
+		
+		assertEquals(4.0, line.intercept(), 0);
+	}
+	
+	@Test
+	public void TestInterceptException(){
+		Point point1 = new Point(1,1);
+		Point point2 = new Point(1,2);
+		
+		Line line = new Line();
+		
+		line.add(point1);
+		line.add(point2);
+		
+		exception.expect(ArithmeticException.class);
+		line.intercept();
 	}
 }
