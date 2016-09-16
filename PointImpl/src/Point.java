@@ -67,7 +67,7 @@ public class Point {
 		String xAsString = String.format(Locale.US, STRING_FORMAT, this.x);
 		String yAsString = String.format(Locale.US, STRING_FORMAT, this.y);
 		
-		return String.format("%s, %s", xAsString, yAsString);
+		return String.format("( %s, %s )", xAsString, yAsString);
 	}
 
 }
