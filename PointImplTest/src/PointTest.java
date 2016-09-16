@@ -61,7 +61,9 @@ public class PointTest {
 	@Test
 	public void testToStringMethod(){
 		Point testPoint = new Point(110.5, 25.3);
-		String expectedString = "( +1.1050E+02, +2.5300E+01 )";
+		String expectedString = "( 1.1050E02, 2.5300E01 )";
+		double x = testPoint.getX();
+		double y = testPoint.getY();
 		String testPointString = testPoint.toString();
 		assertEquals(expectedString, testPointString);
 	}
@@ -75,7 +77,7 @@ public class PointTest {
 	}
 	
 	@Test
-	public void testRotateMethodException() throws Throwable{
+	public void testRotateMethodException(){
 		Point testPoint = new Point(10.0, 20.0);
 		exception.expect(InvalidParameterException.class);
 		testPoint.rotate(200.0);
@@ -85,10 +87,23 @@ public class PointTest {
 	public void testRotateMethod(){
 		Point testPoint = new Point(-2.0, 3.0);
 		double theta = 90.0;
-		testPoint.rotate(theta);te(theta);
-		Point expectedResultPoint = new Point(3.0, 2.0);
-		assertEquals(testPoint, expectedResultPoint);
 		
+		try {
+			testPoint.rotate(theta);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Point expectedResultPoint = new Point(3.0, 2.0);
+		assertEquals(testPoint, expectedResultPoint);	
+	}
+	
+	@Test
+	public void testDisplaceMethod(){
+		Point pointToDisplace = new Point(100.0, 25.0);
+		Point displacePoint = new Point(10.0, -20.5);
+		Point expectedResultPoint = new Point(110.0, 4.5);
+		pointToDisplace.displace(displacePoint);
+		assertEquals(expectedResultPoint, pointToDisplace);
 	}
 	
 
