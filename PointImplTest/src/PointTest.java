@@ -61,7 +61,7 @@ public class PointTest {
 	@Test
 	public void testToStringMethod(){
 		Point testPoint = new Point(110.5, 25.3);
-		String expectedString = "( 1.1050E02, 2.5300E01 )";
+		String expectedString = "( 1.1050E+02, 2.5300E+01 )";
 		double x = testPoint.getX();
 		double y = testPoint.getY();
 		String testPointString = testPoint.toString();
