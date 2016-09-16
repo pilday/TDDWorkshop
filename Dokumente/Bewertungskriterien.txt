@@ -1,0 +1,12 @@
+- der code den man geschrieben hat (nicht so wichtig)
+- tests (wichtig)
+- nur den endzustand beschreiben (man kann schreiben wo man aufpassen muss)
+
+Bewertung:
+10% requirements met (code as simple as possible)
+10% code well structured (code is well structured)
+50% tests (are the tests  complete)
+5%  uml (sind diagramme da)
+5%  statistcs (correct parameters?)
+10% form (the text is complete blabla)
+10% form(bonus) report is very well written
