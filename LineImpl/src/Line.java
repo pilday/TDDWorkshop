@@ -109,7 +109,7 @@ public class Line {
 		return true;
 	}
 
-	public double slope() throws Exception{
+	public double slope() throws ArithmeticException{
 		
 		if(regressionCalculated){
 			return this.slope;
@@ -122,7 +122,7 @@ public class Line {
 		}
 	}
 
-	public double intercept() throws Exception{
+	public double intercept() throws ArithmeticException{
 		
 		if(regressionCalculated){
 			return this.intercept;
@@ -136,7 +136,7 @@ public class Line {
 	}
 
 
-	private void calculateRegression() throws Exception{
+	private void calculateRegression() throws ArithmeticException{
 		
 		try{
 
