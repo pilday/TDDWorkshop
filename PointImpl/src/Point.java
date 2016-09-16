@@ -1,6 +1,9 @@
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 
 public class Point {
-
+	final private String STRING_FORMAT = "0.0000E00";
 
 	private double x;
 	private double y;
@@ -59,7 +62,12 @@ public class Point {
 	
 	@Override
 	public String toString(){
-		return null;
+		NumberFormat formatter = new DecimalFormat(STRING_FORMAT);
+		
+		String xAsString = formatter.format(this.x);
+		String yAsString = formatter.format(this.y);
+		
+		return String.format("%s, %s", xAsString, yAsString);
 	}
 
 }
