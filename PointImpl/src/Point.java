@@ -5,7 +5,7 @@ import java.util.Locale;
 
 
 public class Point {
-	final private String STRING_FORMAT = "0.0000E00";
+	final private String STRING_FORMAT = "%5.4E";
 
 	private double x;
 	private double y;
@@ -49,7 +49,10 @@ public class Point {
 		if(theta < -180 ) throw new InvalidParameterException("Theta parameter is not allowed to be smaller than -180");
 		if(theta > 180) throw new InvalidParameterException("Theta parameter is not allowed to be bigger than +180");
 	
+		double radianAngle = theta * Math.PI / 180;
 		
+		this.y = y*Math.cos(radianAngle) - x*Math.sin(radianAngle);
+		this.x = y*Math.sin(radianAngle) + x*Math.cos(radianAngle);
 	}
 	
 	public void displace(Point p){
