@@ -73,7 +73,7 @@ public class Point {
 	public int hashCode() {
 		int hash = (int)(37l * Double.doubleToLongBits(this.x) * Double.doubleToLongBits(this.y));
 		return hash;
-	};
+	}
 	
 	@Override
 	public String toString(){
