@@ -1,10 +1,17 @@
 import static org.junit.Assert.*;
 
+import java.security.InvalidParameterException;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 
 public class PointTest {
 
+	 @Rule
+	 public final ExpectedException exception = ExpectedException.none();
+	 
 	@Test
 	public void testDefaultConstructor() {
 		Point testPoint = new Point();
@@ -58,5 +65,31 @@ public class PointTest {
 		String testPointString = testPoint.toString();
 		assertEquals(expectedString, testPointString);
 	}
+	
+	@Test
+	public void testNormMethod(){
+		Point testPoint = new Point(105.8, 22.44);
+		double distanceGot = testPoint.norm();
+		double distanceExpected = 108.1535;
+		assertEquals(distanceExpected, distanceGot, 0.0001);
+	}
+	
+	@Test
+	public void testRotateMethodException() throws Throwable{
+		Point testPoint = new Point(10.0, 20.0);
+		exception.expect(InvalidParameterException.class);
+		testPoint.rotate(200.0);
+	}
+	
+	@Test
+	public void testRotateMethod(){
+		Point testPoint = new Point(-2.0, 3.0);
+		double theta = 90.0;
+		testPoint.rotate(theta);te(theta);
+		Point expectedResultPoint = new Point(3.0, 2.0);
+		assertEquals(testPoint, expectedResultPoint);
+		
+	}
+	
 
 }
