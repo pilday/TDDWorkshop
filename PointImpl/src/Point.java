@@ -36,7 +36,11 @@ public class Point {
 	}
 	
 	public double norm(){
-		return 0.0;
+		// Pythagoras
+		double xSquare = this.x * this.x;
+		double ySquare = this.y * this.y;
+				
+		return Math.sqrt(xSquare + ySquare);
 	}
 	
 	public void rotate(double theta) throws Exception{
