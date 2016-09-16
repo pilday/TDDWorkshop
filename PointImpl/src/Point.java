@@ -56,7 +56,8 @@ public class Point {
 	}
 	
 	public void displace(Point p){
-		
+		this.x += p.getX();
+		this.y += p.getY();
 	}
 	
 	@Override
