@@ -189,6 +189,18 @@ public class LineTest {
 	}
 	
 	@Test
+	public void TestIsValid2SamePoints(){
+		Point point = new Point(1,1);
+		
+		Line line = new Line();
+		
+		line.add(point);
+		line.add(point);
+		
+		assertFalse(line.isValid());
+	}
+	
+	@Test
 	public void TestIsValidInfiniteSlope(){
 		Point point1 = new Point(1,1);
 		Point point2 = new Point(1,2);
@@ -255,6 +267,19 @@ public class LineTest {
 	}
 	
 	@Test
+	public void TestSlopeException2SameValues(){
+		Point point = new Point(1,1);
+		
+		Line line = new Line();
+		
+		line.add(point);
+		line.add(point);
+		
+		exception.expect(ArithmeticException.class);
+		line.slope();
+	}
+	
+	@Test
 	public void TestValidIntercept(){
 		Point point1 = new Point(2,2);
 		Point point2 = new Point(1,3);
@@ -268,7 +293,7 @@ public class LineTest {
 	}
 	
 	@Test
-	public void TestInterceptException(){
+	public void TestInterceptExceptionNoInterception(){
 		Point point1 = new Point(1,1);
 		Point point2 = new Point(1,2);
 		
@@ -276,6 +301,19 @@ public class LineTest {
 		
 		line.add(point1);
 		line.add(point2);
+		
+		exception.expect(ArithmeticException.class);
+		line.intercept();
+	}
+	
+	@Test
+	public void TestInterceptException2SameValues(){
+		Point point = new Point(1,1);
+		
+		Line line = new Line();
+		
+		line.add(point);
+		line.add(point);
 		
 		exception.expect(ArithmeticException.class);
 		line.intercept();
