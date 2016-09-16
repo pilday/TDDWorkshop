@@ -106,7 +106,7 @@ public class Line {
 		catch(Exception e){
 			return false;
 		}
-		if(this.slope == Double.NaN || this.intercept == Double.NaN){
+		if(Double.isNaN(this.slope)|| Double.isNaN(this.intercept)){
 			return false;
 		}
 		return true;
