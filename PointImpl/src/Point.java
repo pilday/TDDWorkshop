@@ -44,7 +44,7 @@ public class Point {
 		return Math.sqrt(xSquare + ySquare);
 	}
 	
-	public void rotate(double theta) throws Exception{
+	public void rotate(double theta) throws InvalidParameterException{
 		// check if parameter is valid
 		if(theta < -180 ) throw new InvalidParameterException("Theta parameter is not allowed to be smaller than -180");
 		if(theta > 180) throw new InvalidParameterException("Theta parameter is not allowed to be bigger than +180");
