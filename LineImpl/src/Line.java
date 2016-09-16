@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class Line {
 
@@ -27,6 +28,62 @@ public class Line {
 	
 	@Override
 	public boolean equals(Object other){
-		return false;
+		
+		if(!(other instanceof Point[])){
+			return false;
+		}
+		
+		Point[] compareArray = (Point[]) other;
+		ArrayList<Point> thisline = new ArrayList<Point>(Arrays.asList(line));
+		ArrayList<Point> compareline = new ArrayList<Point>(Arrays.asList(compareArray));
+		
+		if(thisline.size() != compareline.size()){
+			return false;
+		}
+		
+		for(Point point : thisline){
+			if(compareline.contains(point)){
+				thisline.remove(point);
+			}
+		}
+		
+		return thisline.isEmpty();
+
+		
+		
+	}
+	
+	@Override
+	public int hashCode(){
+		
+		double hash = 0;
+		
+		for(Point p : line){
+			hash =+ p.getX();
+			hash =- p.getY();
+		}
+		
+		return (int) hash;
+	}
+	
+	@Override
+	public String toString(){
+		
+		StringBuilder sb =  new StringBuilder();
+		
+		if(line.length > 0){
+			
+		sb.append("(");
+		for(int i = 0; i < line.length; i++){
+			if(i < line.length - 1){
+			sb.append(line[i].toString() + ",\n");
+			}
+			else{
+			sb.append(line[i].toString() + ")");
+			}
+		}
+		return sb.toString();
+		}	
+		return "";
 	}
 }
