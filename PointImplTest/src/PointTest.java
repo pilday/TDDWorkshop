@@ -94,7 +94,7 @@ public class PointTest {
 			e.printStackTrace();
 		}
 		Point expectedResultPoint = new Point(3.0, 2.0);
-		assertEquals(testPoint, expectedResultPoint);	
+		assertEquals(expectedResultPoint, testPoint);	
 	}
 	
 	@Test
