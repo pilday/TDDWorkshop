@@ -179,7 +179,7 @@ public class Line {
 		}
 
 		catch(Exception e){
-			throw new Exception("Regression couldn't be calculated.");
+			throw new ArithmeticException("Regression couldn't be calculated.");
 		}
 	}
 } 
